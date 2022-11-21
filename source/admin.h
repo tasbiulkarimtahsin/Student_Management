@@ -1,10 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Admin {
-   private:
+class Admin
+{
+private:
     string name1, no, name2, name3, address, mobile;
 
-   public:
+public:
+    void adminAuth();
     void admin_login();
     void add_student();
     void remove_student();
@@ -12,20 +14,39 @@ class Admin {
     void modify_student();
 };
 
-void Admin::admin_login() {
+void Admin::adminAuth()
+{
+manustart:
+    string pass;
+    while (1)
+    {
+        cout << "\t\t\t\t Enter your password: ";
+        cin >> pass;
+        if (pass == "admin")
+        {
+            admin_login();
+        }
+        else
+        {
+            cout << "\n\t\t\t Try Again :(   : y/n" << endl;
+            char ch;
+            cin >> ch;
+            if (ch == 'n' || ch == 'N')
+                break;
+        }
+    }
+}
+
+void Admin::admin_login()
+{
     int choice2;
     char x1;
 menustart:
     // system("cls");
     fstream file;
-    cout << "\n------------------------------------------------------------------"
-            "------------------------";
-    cout << "\n-------------------------------------ADMIN "
-            "LOGIN------------------------------------------"
-         << endl;
-    cout << "--------------------------------------------------------------------"
-            "-----------------------"
-         << endl;
+    cout << "\n------------------------------------------------------------------------------------------";
+    cout << "\n-------------------------------------ADMIN LOGIN------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------------------------" << endl;
     cout << "\n\t\t\t\t 1.ADD NEW STUDENT" << endl;
     cout << "\t\t\t\t 2.STUDENT DISPLAY" << endl;
     cout << "\t\t\t\t 3.MODIFY STUDENT" << endl;
@@ -37,46 +58,44 @@ menustart:
     cout << "\t\t\t\t ENTER YOUR OPTION: " << endl;
     cin >> choice2;
 
-    switch (choice2) {
-        case 1:
+    switch (choice2)
+    {
+    case 1:
 
-            do {
-                add_student();
-                cout << "\n\t\t\tadd another student record(Y<N add_student(Y,N): ";
-                cin >> x1;
-            } while (x1 == 'y' || x1 == 'Y');
+        do
+        {
+            add_student();
+            cout << "\n\t\t\tadd another student record(Y<N add_student(Y,N): ";
+            cin >> x1;
+        } while (x1 == 'y' || x1 == 'Y');
 
-            break;
+        break;
 
-        case 2:
-            student_record();
-            break;
-        case 3:
-            modify_student();
-            break;
-        case 4:
-            remove_student();
-            break;
+    case 2:
+        student_record();
+        break;
+    case 3:
+        modify_student();
+        break;
+    case 4:
+        remove_student();
+        break;
 
-        case 5:
-            exit(0);
+    case 5:
+        exit(0);
 
-        default:
-            cout << "\n\t\t\t\t Please try again later" << endl;
-            break;
+    default:
+        cout << "\n\t\t\t\t Please try again later" << endl;
+        break;
     }
 }
-void Admin::add_student() {
+void Admin::add_student()
+{
 menustart:
     fstream file;
-    cout << "\n------------------------------------------------------------------"
-            "------------------------";
-    cout << "\n-------------------------------------ADD NEW "
-            "STUDENT------------------------------------------"
-         << endl;
-    cout << "--------------------------------------------------------------------"
-            "-----------------------"
-         << endl;
+    cout << "\n------------------------------------------------------------------------------------------";
+    cout << "\n-------------------------------------ADD NEW STUDENT------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------------------------" << endl;
     cout << "\t\t ENTER NAME: " << endl;
     cin.ignore();
     getline(cin, name1);
@@ -95,41 +114,46 @@ menustart:
          << address << " " << mobile << "\n";
     file.close();
 }
-void Admin::student_record() {
+void Admin::student_record()
+{
 manustart:
     fstream file;
     int total = 1;
-    cout << "\n------------------------------------------------------------------"
-            "------------------------";
-    cout << "\n-------------------------------------STUDENT "
-            "RECORD------------------------------------------"
-         << endl;
-    cout << "--------------------------------------------------------------------"
-            "-----------------------"
+    cout << "\n------------------------------------------------------------------------------------------";
+    cout << "\n-------------------------------------STUDENT RECORD------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------------------------"
          << endl;
     file.open("studentRecord.txt", ios::in);
-    if (!file) {
+    if (!file)
+    {
         cout << "\n\t\t\t NO DATA IS PRESENT....";
         file.close();
-    } else {
+    }
+    else
+    {
         file >> name1 >> no >> name2 >> name3 >> address >> mobile;
-        while (!file.eof()) {
-            cout << "\t\t\t STUDENT NO: " << total++ << endl;
+        while (!file.eof())
+        {
+            cout << "\t\t\t STUDENT SERIAL NO: " << total++ << endl;
             cout << "\t\t\t STUDENT NAME: " << name1 << endl;
+            cout << "\t\t\t STUDENT ID NO: " << no << endl;
             cout << "\t\t\t STUDENT FATHERS NAME: " << name2 << endl;
             cout << "\t\t\t STUDENT MOTHERS NAME: " << name3 << endl;
             cout << "\t\t\t STUDENT EMAIL ADDRESS: " << address << endl;
-            cout << "\t\t\t STUDENT MOBILE NO: " << mobile << endl;
+            cout << "\t\t\t STUDENT MOBILE NO: " << mobile << endl
+                 << endl;
             file >> name1 >> no >> name2 >> name3 >> address >> mobile;
         }
-        if (total == 0) {
+        if (total == 0)
+        {
             cout << "\n\t\t\t NO DATA IS PRESENT....";
         }
     }
     file.close();
 }
 
-void Admin::modify_student() {
+void Admin::modify_student()
+{
 menustart:
     // system("cls");
     fstream file, file1;
@@ -137,25 +161,28 @@ menustart:
     string roll_no;
     cout << "\n------------------------------------------------------------------"
             "------------------------";
-    cout << "\n-------------------------------------MODIFY "
-            "STUDENT------------------------------------------"
-         << endl;
-    cout << "\n------------------------------------------------------------------"
-            "-------------------------";
+    cout << "\n-------------------------------------MODIFY STUDENT------------------------------------------" << endl;
+    cout << "\n-------------------------------------------------------------------------------------------";
     file.open("studentRecord.txt", ios::in);
-    if (!file) {
+    if (!file)
+    {
         cout << "\n\t\t\t NO DATA IS PRESENT....";
         file.close();
-    } else {
+    }
+    else
+    {
         cout << "\n Enter ROll NO Of Student  You Want to Modify: ";
         cin >> roll_no;
         file1.open("Record.txt", ios::app | ios::out);
         file >> name1 >> no >> name2 >> name3 >> address >> mobile;
-        while (!file.eof()) {
-            if (roll_no != no) {
-                file1 << " " << name1 << " " << no << " " << name2 << " " << name3
-                      << " " << address << " " << mobile << "\n";
-            } else {
+        while (!file.eof())
+        {
+            if (roll_no != no)
+            {
+                file1 << " " << name1 << " " << no << " " << name2 << " " << name3 << " " << address << " " << mobile << "\n";
+            }
+            else
+            {
                 cout << "\t\t ENTER NAME: " << endl;
                 cin.ignore();
                 getline(cin, name1);
@@ -169,13 +196,13 @@ menustart:
                 getline(cin, address);
                 cout << "\t\t MOBILE NO: " << endl;
                 getline(cin, mobile);
-                file1 << " " << name1 << " " << no << " " << name2 << " " << name3
-                      << " " << address << " " << mobile << "\n";
+                file1 << " " << name1 << " " << no << " " << name2 << " " << name3 << " " << address << " " << mobile << "\n";
                 found++;
             }
             file >> name1 >> no >> name2 >> name3 >> address >> mobile;
         }
-        if (found == 0) {
+        if (found == 0)
+        {
             cout << "\n\t\t\t Student Roll No Not Found..........";
         }
     }
@@ -184,35 +211,40 @@ menustart:
     remove("studentRecord.txt");
     rename("Record.txt", "studentRecord.txt");
 }
-void Admin::remove_student() {
+void Admin::remove_student()
+{
 manustart:
     fstream file, file1;
     string roll_no1;
     int found = 0;
-    cout << "\n------------------------------------------------------------------"
-            "------------------------";
-    cout << "\n-------------------------------------REMOVE "
-            "STUDENT------------------------------------------"
-         << endl;
-    cout << "--------------------------------------------------------------------"
-            "-----------------------"
-         << endl;
-    file.open("studentRecord.txt", ios::app | ios::out);
-    if (!file) {
+    cout << "\n------------------------------------------------------------------------------------------";
+    cout << "\n-------------------------------------REMOVE STUDENT------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------------------------" << endl;
+    file.open("studentRecord.txt", ios::in);
+    if (!file)
+    {
         cout << "\n\t\t\t NO Data Is Present.........";
-    } else {
-        cout << "\n\t\t\t Enter Roll No. Of Student you want to remove";
+    }
+    else
+    {
+        cout << "\n\t\t\t Enter Roll No. Of Student you want to remove: ";
         cin >> roll_no1;
         file1.open("Record.txt", ios::app | ios::out);
         file >> name1 >> no >> name2 >> name3 >> address >> mobile;
-        while (!file.eof()) {
-            if (roll_no1 != no) {
-                file1 << " " << name1 << " " << no << " " << name2 << " " << name3
-                      << " " << address << " " << mobile << "\n";
+        while (!file.eof())
+        {
+            if (roll_no1 != no)
+            {
+                file1 << " " << name1 << " " << no << " " << name2 << " " << name3 << " " << address << " " << mobile << "\n";
+            }
+            else
+            {
+                found++;
             }
             file >> name1 >> no >> name2 >> name3 >> address >> mobile;
         }
-        if (found == 0) {
+        if (found == 0)
+        {
             cout << "\n\t\t\t Student Roll No Not Found..........";
         }
 
