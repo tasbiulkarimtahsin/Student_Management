@@ -8,6 +8,8 @@ private:
 public:
     void adminAuth();
     void admin_login();
+    void admin_workspace();
+    void faculty_workspace();
     void add_student();
     void remove_student();
     void student_record();
@@ -36,8 +38,44 @@ manustart:
         }
     }
 }
-
 void Admin::admin_login()
+{
+manustart:
+    int choice;
+    char x;
+    cout << "\n------------------------------------------------------------------------------------------";
+    cout << "\n-------------------------------------ADMIN LOGIN------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------------------------" << endl;
+    cout << "\n\t\t\t\t 1.ADMIN WORKSPACE" << endl;
+    cout << "\t\t\t\t 2.FACULTY VIEW" << endl;
+    cout << "\t\t\t\t 3.EXIT" << endl;
+     cout << "\t\t\t\t---------------------------" << endl;
+    cout << "\t\t\t\t CHOOSE OPTION BETWEEN[1,2,3]" << endl;
+    cout << "\t\t\t\t---------------------------" << endl;
+    cout << "\t\t\t\t ENTER YOUR OPTION: " << endl;
+    cin >> choice;
+
+    switch (choice)
+    {
+    case 1:
+        admin_workspace();
+        break;
+
+    case 2:
+        faculty_workspace();
+        break;
+
+    case 3:
+        exit(0);
+
+    default:
+        cout << "\n\t\t\t\t Please try again later" << endl;
+        break;
+    }
+}
+
+
+void Admin::admin_workspace()
 {
     int choice2;
     char x1;
@@ -45,7 +83,7 @@ menustart:
     // system("cls");
     fstream file;
     cout << "\n------------------------------------------------------------------------------------------";
-    cout << "\n-------------------------------------ADMIN LOGIN------------------------------------------" << endl;
+    cout << "\n-------------------------------------ADMIN WORKSPACE------------------------------------------" << endl;
     cout << "-------------------------------------------------------------------------------------------" << endl;
     cout << "\n\t\t\t\t 1.ADD NEW STUDENT" << endl;
     cout << "\t\t\t\t 2.STUDENT DISPLAY" << endl;
@@ -53,7 +91,7 @@ menustart:
     cout << "\t\t\t\t 4.REMOVE STUDENT" << endl;
     cout << "\t\t\t\t 5.EXIT" << endl;
     cout << "\t\t\t\t---------------------------" << endl;
-    cout << "\t\t\t\t CHOOSE OPTION[1,2,3]" << endl;
+    cout << "\t\t\t\t CHOOSE OPTION[1,2,3,4,5]" << endl;
     cout << "\t\t\t\t---------------------------" << endl;
     cout << "\t\t\t\t ENTER YOUR OPTION: " << endl;
     cin >> choice2;
@@ -210,6 +248,10 @@ menustart:
     file.close();
     remove("studentRecord.txt");
     rename("Record.txt", "studentRecord.txt");
+}
+void Admin::faculty_workspace()
+{
+
 }
 void Admin::remove_student()
 {
